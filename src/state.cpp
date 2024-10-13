@@ -45,6 +45,11 @@ uint32_t TState::CountInversions_(const TPile& pile) {
 
 void TState::ConvertToCanonical() {  // this one allows us to dump states for a_star
     std::sort(piles_.begin(), piles_.end());
+    for (auto& pile : piles_) {
+        if (IsPileDone(pile)) {
+            pile = {};
+        }
+    }
 }
 
 std::vector<TState> TState::GenerateNextStates() {
@@ -83,7 +88,7 @@ bool TState::IsPileDone(const TPile& pile) {
     }
 
     for (uint32_t cardInd = 0; cardInd < pile.size(); ++cardInd) {
-        if (pile[cardInd] != SMALLEST_CARD + cardInd) {
+        if (pile[cardInd] != GREATEST_CARD - cardInd) {
             return false;
         }
     }

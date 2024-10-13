@@ -1,12 +1,15 @@
 #include <a_star.hpp>
 #include <utility>
-
+#include <iostream>
 TAStarAlgo::TAStarAlgo(TState start) : Start_(std::move(start)) {
     Start_.ConvertToCanonical();
-    UsedStates_.emplace(Start_);
+    Transitions_.emplace(Start_);
 }
 
-TAStarAlgo::TAStarAlgo(const std::vector<TPile>& toCreateState) : Start_(toCreateState, 0) {}
+TAStarAlgo::TAStarAlgo(const std::vector<TPile>& toCreateState) : Start_(toCreateState, 0) {
+    Start_.ConvertToCanonical();
+    Transitions_.emplace(Start_);
+}
 
 std::optional<TState> TAStarAlgo::AStar() {
     const uint32_t MAX_CYCLE_MOVES = 1000000;
