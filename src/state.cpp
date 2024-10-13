@@ -64,7 +64,7 @@ std::vector<TState> TState::GenerateNextStates() {
             if (pileToAdd == pileToGrab) {
                 continue;
             }
-            if (piles_[pileToGrab].back() >= piles_[pileToAdd].back()) {
+            if (piles_[pileToGrab].back() > piles_[pileToAdd].back()) {
                 continue;
             }
 
